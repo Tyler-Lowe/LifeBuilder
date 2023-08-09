@@ -1,12 +1,13 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+import bgImg from '../../images/main-bg-2.jpg'
 
 function LoginPage() {
   const history = useHistory();
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#007ea9', padding: '10rem'}}>
       <LoginForm />
 
       <center>

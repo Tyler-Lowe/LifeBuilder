@@ -78,3 +78,50 @@ Grid
   flex-basis: 100%;
   max-width: 100%;
 }
+
+.main-text-container {
+  display: flex;
+  color: #4200cd;
+}
+
+.main-text-container > div > p {
+  color: #f05b6d;
+  font-size: 1.25rem;
+}
+
+.bg-container {
+  color: #4200cd;
+  background-color: #fffffb;
+  background-color: #007ea9;
+  
+}
+
+body {
+  background-color: #fffffb;
+}
+
+.informational-image {
+  width: 600px;
+}
+
+.info-heading {
+  color: #4200cd;
+  font-size: 3rem;
+}
+
+.main-heading {
+  font-size: 4rem;
+  margin-bottom: .25rem;
+}
+
+.button-main {
+  background-color: #f05b6d;
+}
+
+.info-section {
+  margin-top: 8rem;
+}
+
+p {
+  font-size: 1.25rem;
+}

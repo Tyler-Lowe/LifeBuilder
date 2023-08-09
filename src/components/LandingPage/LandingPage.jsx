@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import plannerImg from '../../images/maing-graphic-2.jpg'
+import infoImg from '../../images/info-img-no-bg.png'
+import gradImg from '../../images/hs-grad.jpg'
+import careersImg from '../../images/careers.jpg'
+import bgImg from '../../images/main-bg-2.jpg'
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { Container } from '@mui/material';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
@@ -14,55 +22,61 @@ function LandingPage() {
   };
 
   return (
-    <div className="container">
-      <h2>{heading}</h2>
-
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
-
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
-
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
-        </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
-      </div>
-    </div>
+    <>
+    {/* <div style={{ backgroundImage: `url(${bgImg})`, backgroundSize: 'cover'}}> */}
+      <Container maxWidth="lg">
+        <Grid container spacing={1}>
+          <Grid className="main-text-container" alignItems={'center'} justifyContent={'center'} item xl={5}>
+            <div>
+              <h1 className='main-heading'>Match Your Career With <br /> Your Lifestyle</h1>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic quaerat, repudiandae corporis quidem nostrum eum iure.</p>
+              <Button sx={{ backgroundColor: '#f05b6d', padding: '.5rem 1.25rem' }} className='button-main' variant="contained">Start Your Journey</Button>
+            </div>
+          </Grid>
+          <Grid alignSelf={'center'} item xs={7}>
+            <div >
+              <img src={plannerImg} alt="Image of a planner" />
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+    {/* </div> */}
+      <Grid className='info-section' sx={{ backgroundColor: '#007ea9'}}>
+        <Grid textAlign={'center'} justifyContent={'center'} container item xl={12}>
+            <h2 className='info-heading' style={{ color: '#fff' }}>How It Works?</h2>
+            <Grid justifyContent={'center'} container>
+              <Grid item xl={6}>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque nobis aut similique praesentium accusantium tenetur voluptatem, sapiente dolorum ullam delectus assumenda soluta necessitatibus officia pariatur possimus inventore dignissimos dolor.</p>
+              <img className='informational-image' src={infoImg} alt="Image of a planner"/>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque nobis aut similique praesentium accusantium tenetur voluptatem, sapiente dolorum ullam delectus assumenda soluta necessitatibus officia pariatur possimus inventore dignissimos dolor.</p>
+              </Grid>
+            </Grid>
+        </Grid>
+      </Grid>
+      <Container maxWidth="lg">
+      <Grid className='info-section'>
+        <Grid textAlign={'center'} justifyContent={'center'} container item xl={12}>
+            <h2 className='info-heading'>Who It's For?</h2>
+            <Grid justifyContent={'center'} container>
+              <Grid item xl={6}>
+              <img className='informational-image' src={gradImg} alt="Image of a planner"/>
+              </Grid>
+              <Grid alignSelf={'center'} item xl={6}>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque nobis aut similique praesentium accusantium tenetur voluptatem, sapiente dolorum ullam delectus assumenda soluta necessitatibus officia pariatur possimus inventore dignissimos dolor.</p>
+              </Grid>
+            </Grid>
+            <Grid justifyContent={'center'} container>
+              <Grid alignSelf={'center'} item xl={6}>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque nobis aut similique praesentium accusantium tenetur voluptatem, sapiente dolorum ullam delectus assumenda soluta necessitatibus officia pariatur possimus inventore dignissimos dolor.</p>
+              </Grid>
+              <Grid item xl={6}>
+              <img className='informational-image' src={careersImg} alt="Image of a planner"/>
+              </Grid>
+            </Grid>
+        </Grid>
+      </Grid>
+      </Container>
+      </>
   );
 }
 

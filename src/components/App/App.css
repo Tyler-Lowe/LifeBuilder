@@ -101,12 +101,28 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
-  border-radius: 3px;
+  background-color: #fffffb;
+  border-radius: 15px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+}
+
+.form-heading {
+  text-align: center;
 }
 
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+.font-blue {
+  color: #007ea9;
+}
+
+.font-red {
+  color: #f05b6d;
+}
+
+.font-purple {
+  color: #4200cd;
 }
