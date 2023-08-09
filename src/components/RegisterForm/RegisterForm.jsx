@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
@@ -13,6 +15,8 @@ function RegisterForm() {
     dispatch({
       type: 'REGISTER',
       payload: {
+        firstname: firstname,
+        lastname: lastname,
         username: username,
         password: password,
       },
@@ -20,7 +24,7 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
+    <form className="text-align-center" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
@@ -28,11 +32,34 @@ function RegisterForm() {
         </h3>
       )}
       <div>
-        <label htmlFor="username">
-          Username:
+      <label htmlFor="firstname">
           <input
+          className='input-field'
+            type="text"
+            name="firstname"
+            placeholder='First Name'
+            value={firstname}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </label>
+        <label htmlFor="lastname">
+          <input
+          className='input-field'
+            type="text"
+            name="lastname"
+            placeholder='Last Name'
+            value={lastname}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+        </label>
+        <label htmlFor="username">
+          <input
+          className='input-field'
             type="text"
             name="username"
+            placeholder='Enter Email Address'
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
@@ -41,10 +68,11 @@ function RegisterForm() {
       </div>
       <div>
         <label htmlFor="password">
-          Password:
           <input
+          className='input-field'
             type="password"
             name="password"
+            placeholder='Enter Your Password'
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
@@ -52,7 +80,7 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <input className="btn button-main button-width" type="submit" name="submit" value="Register" />
       </div>
     </form>
   );
