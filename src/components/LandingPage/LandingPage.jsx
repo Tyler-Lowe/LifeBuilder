@@ -30,7 +30,12 @@ function LandingPage() {
             <div>
               <h1 className='main-heading'>Match Your Career With <br /> Your Lifestyle</h1>
               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic quaerat, repudiandae corporis quidem nostrum eum iure.</p>
-              <Button sx={{ backgroundColor: '#f05b6d', padding: '.5rem 1.25rem' }} className='button-main' variant="contained">Start Your Journey</Button>
+              <Button sx={{ backgroundColor: '#f05b6d', padding: '.5rem 1.25rem' }} className='button-main' variant="contained"
+                                type="button"
+                                onClick={() => {
+                                  history.push('/registration');
+                                }}
+              >Start Your Journey</Button>
             </div>
           </Grid>
           <Grid alignSelf={'center'} item xs={7}>

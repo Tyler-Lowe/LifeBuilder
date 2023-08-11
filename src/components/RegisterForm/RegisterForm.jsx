@@ -25,7 +25,7 @@ function RegisterForm() {
 
   return (
     <form className="text-align-center" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2 className='text-purple'>Register Here!</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -40,7 +40,7 @@ function RegisterForm() {
             placeholder='First Name'
             value={firstname}
             required
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event) => setFirstname(event.target.value)}
           />
         </label>
         <label htmlFor="lastname">
@@ -51,7 +51,7 @@ function RegisterForm() {
             placeholder='Last Name'
             value={lastname}
             required
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event) => setLastname(event.target.value)}
           />
         </label>
         <label htmlFor="username">
