@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import { Container } from "@mui/material";
+import "./MajorSelection.css";
+import { Dashboard } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import "./Dashboard.css";
-import { Container } from "@mui/material";
+import CollegeSelection from "../CollegeSelection/CollegeSelection";
+import CollegeMajorSelection from "../CollegeMajorSelection/CollegeMajorSelection"
+import StateSelection from "../StateSelection/StateSelection";
 
-function Dashboard() {
-  return (
-    <>
-      {/* #f0f5fd, purple is #f3edff, new purple */}
-      <div className="background-purple">
+
+function MajorSelection() {
+    return (
+        <>
+         <div className="background-purple">
         <Container maxWidth="xl">
           <Grid container>
             <Grid
@@ -94,7 +98,7 @@ function Dashboard() {
                     border: "1px solid #f3f3f3",
                   }}
                 >
-                  <h2>Name of Chosen Career Field</h2>
+                    <h2>Pick Your State</h2>
                   <Grid container justifyContent={"center"}>
                     <Grid
                       className=""
@@ -102,20 +106,39 @@ function Dashboard() {
                       xl={8}
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Earum ad cumque veniam. Nostrum accusantium debitis.
-                      </p>
+                        <StateSelection />
                     </Grid>
+                  </Grid>
+                  <h2>Pick Your College</h2>
+                  <Grid container justifyContent={"center"}>
                     <Grid
-                      textAlign={"center"}
                       className=""
                       item
-                      xl={4}
-                      alignSelf={"center"}
+                      xl={8}
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
-                      <Button
+                        <CollegeSelection />
+                    </Grid>
+                  </Grid>
+                  <h2>Pick Your Major</h2>
+                  <Grid container justifyContent={"center"}>
+                    <Grid
+                      className=""
+                      item
+                      xl={8}
+                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
+                    >
+                        <CollegeMajorSelection />
+                    </Grid>
+                  </Grid>
+                  <Grid container justifyContent={"center"}>
+                    <Grid
+                      className=""
+                      item
+                      xl={8}
+                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
+                    >
+                                              <Button
                         sx={{
                           backgroundColor: "#f05b6d",
                           padding: ".5rem 1.25rem",
@@ -132,117 +155,7 @@ function Dashboard() {
                     </Grid>
                   </Grid>
                 </Grid>
-                {/* For container Heading */}
-                <Grid item xl={10}>
-                  <h2>Will this be your future</h2>
                 </Grid>
-                {/* End of Container Heading */}
-                <Grid
-                  className="db-primary-container"
-                  item
-                  xl={10}
-                  sx={{
-                    backgroundColor: "#fffffb",
-                    borderRadius: "15px",
-                    padding: "1rem",
-                  }}
-                >
-                  <h2>Name of Chosen Career Field</h2>
-                  <p>University Name</p>
-                  <p>Degree Name</p>
-                  <Grid container justifyContent={"center"}>
-                    <Grid
-                      className=""
-                      item
-                      xl={8}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <p>Avg Salary of "Name of Career": $75000</p>
-                      <p>Monthly Take Home Pay: $4500</p>
-                      <p>Avg Monthly Mortgage: $1800</p>
-                      <p>Avg Monthly cost of groceries: $400</p>
-                      <p>Avg Monthly cost of Utilities: $250</p>
-                      <p>Avg Monthly cost of car payment: $400</p>
-                      <p>Avg Monthly cost of car Insurance: $150</p>
-                      <p>Avg Monthly student loan payment: $400</p>
-                    </Grid>
-                    <Grid
-                      textAlign={"center"}
-                      className=""
-                      item
-                      xl={4}
-                      alignSelf={"center"}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <Button
-                        sx={{
-                          backgroundColor: "#f05b6d",
-                          padding: ".5rem 1.25rem",
-                        }}
-                        className="button-main"
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          history.push("/registration");
-                        }}
-                      >
-                        Change me to a freaking pie chart brotherrrr
-                      </Button>
-                    </Grid>
-                    <h3>Retirement Forecast</h3>
-                  </Grid>
-                  <div>Cool Chart.js graph</div>
-                </Grid>
-                <Grid
-                  className="db-primary-container"
-                  item
-                  xl={10}
-                  sx={{
-                    backgroundColor: "#fffffb",
-                    borderRadius: "15px",
-                    padding: "1rem",
-                    marginTop: "3rem",
-                  }}
-                >
-                  <h2>Name of Chosen Career Field</h2>
-                  <Grid container justifyContent={"center"}>
-                    <Grid
-                      className=""
-                      item
-                      xl={8}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Earum ad cumque veniam. Nostrum accusantium debitis.
-                      </p>
-                    </Grid>
-                    <Grid
-                      textAlign={"center"}
-                      className=""
-                      item
-                      xl={4}
-                      alignSelf={"center"}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <Button
-                        sx={{
-                          backgroundColor: "#f05b6d",
-                          padding: ".5rem 1.25rem",
-                        }}
-                        className="button-main"
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          history.push("/registration");
-                        }}
-                      >
-                        Start Your Journey
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
                 <div>I am right here! (3)</div>
@@ -251,8 +164,8 @@ function Dashboard() {
           </Grid>
         </Container>
       </div>
-    </>
-  );
+        </>
+    )
 }
 
-export default Dashboard;
+export default MajorSelection;

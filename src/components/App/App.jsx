@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Dashboard from '../Dashboard/Dashboard';
 
 import './App.css';
+import MajorSelection from '../MajorSelection/MajorSelection';
 
 function App() {
   const dispatch = useDispatch();
@@ -75,6 +76,14 @@ function App() {
             path="/dashboard"
           >
             <Dashboard />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/college-major-selection"
+          >
+            <MajorSelection />
           </ProtectedRoute>
 
           <Route

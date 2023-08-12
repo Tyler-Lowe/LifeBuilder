@@ -173,3 +173,7 @@ input {
 .right-box-shadow {
   box-shadow: 15px 0 20px -20px rgba(0, 0, 0, 0.45);
 }
+
+.text-center {
+  text-align: center;
+}
