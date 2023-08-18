@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
@@ -7,10 +7,15 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import HomeIcon from '@mui/icons-material/Home';
-import "./Dashboard.css";
 import { Container } from "@mui/material";
+import {useSelector, useDispatch} from 'react-redux';
 
-function Dashboard() {
+
+
+function UserHomePage() {
+    const history = useHistory();
+    const user = useSelector((store) => store.user);
+    const collegeMajor = useSelector((store) => store.collegeMajor);
   return (
     <>
       {/* #f0f5fd, purple is #f3edff, new purple */}
@@ -88,24 +93,19 @@ function Dashboard() {
                 xl={8}
                 sx={{ backgroundColor: "#f0f5fd", borderRadius: "25px" }}
               >
-                {/* For container Heading */}
-                <Grid item xl={10}>
-                  <h2>Will this be your future</h2>
-                </Grid>
-                {/* End of Container Heading */}
                 <Grid
                   className="db-primary-container"
                   item
                   xl={10}
                   sx={{
                     backgroundColor: "#fffffb",
-                    borderRadius: "15px",
+                    borderRadius: "25px",
                     padding: "1rem",
+                    marginTop: "3rem",
+                    border: "1px solid #f3f3f3",
                   }}
                 >
-                  <h2>Name of Chosen Career Field</h2>
-                  <p>University Name</p>
-                  <p>Degree Name</p>
+                  <h2>Try a new Future?</h2>
                   <Grid container justifyContent={"center"}>
                     <Grid
                       className=""
@@ -113,14 +113,10 @@ function Dashboard() {
                       xl={8}
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
-                      <p>Avg Salary of "Name of Career": $75000</p>
-                      <p>Monthly Take Home Pay: $4500</p>
-                      <p>Avg Monthly Mortgage: $1800</p>
-                      <p>Avg Monthly cost of groceries: $400</p>
-                      <p>Avg Monthly cost of Utilities: $250</p>
-                      <p>Avg Monthly cost of car payment: $400</p>
-                      <p>Avg Monthly cost of car Insurance: $150</p>
-                      <p>Avg Monthly student loan payment: $400</p>
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Earum ad cumque veniam. Nostrum accusantium debitis.
+                      </p>
                     </Grid>
                     <Grid
                       textAlign={"center"}
@@ -139,17 +135,50 @@ function Dashboard() {
                         variant="contained"
                         type="button"
                         onClick={() => {
-                          history.push("/registration");
+                          history.push("/college-major-selection");
                         }}
                       >
-                        Change me to a freaking pie chart brotherrrr
+                        Start Your Journey
                       </Button>
                     </Grid>
-                    <h3>Retirement Forecast</h3>
                   </Grid>
-                  <div>Cool Chart.js graph</div>
                 </Grid>
-                <h1>Text box here with comments. Has an edit button and a delete button. </h1>
+                {/* For container Heading */}
+                <Grid item xl={10}>
+                  <h2>Need help getting started?</h2>
+                </Grid>
+                {/* End of Container Heading */}
+                <Grid
+                  className="db-primary-container"
+                  item
+                  xl={10}
+                  sx={{
+                    backgroundColor: "#fffffb",
+                    borderRadius: "15px",
+                    padding: "1rem",
+                  }}
+                >
+                  <h2>Tips for choosing a major</h2>
+                  <Grid container justifyContent={"center"}>
+                    <Grid
+                      className=""
+                      item
+                      xl={12}
+                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
+                    >
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet odio vel praesentium aspernatur numquam, ad perferendis harum, dignissimos voluptates a consequatur blanditiis vitae. Natus alias id nesciunt minima repellendus.</p>
+                    </Grid>
+                    <Grid
+                      textAlign={"center"}
+                      className=""
+                      item
+                      xl={4}
+                      alignSelf={"center"}
+                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
+                    >
+                    </Grid>
+                  </Grid>
+                </Grid>
                 <Grid
                   className="db-primary-container"
                   item
@@ -202,7 +231,13 @@ function Dashboard() {
               </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
-                <div>I am right here! (3)</div>
+                <div>Howdy, <span>{user.first_name}!</span></div>
+                {/* <div>Howdy, <span>{collegeMajor[0].major_name}!</span></div> */}
+                {/* <div>
+                    {collegeMajor.map((collegeMajor, index) => (
+                        <div key={index}>Howdy, <span>{collegeMajor.major_name}!</span> - Average Salary: ${collegeMajor.average_salary}</div>
+                    ))}
+                </div> */}
               </Grid>
             </Grid>
           </Grid>
@@ -212,4 +247,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default UserHomePage;

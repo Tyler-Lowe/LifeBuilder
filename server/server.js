@@ -8,9 +8,16 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const collegeMajorRouter = require('./routes/collegemajor.router');
+const collegeNameRouter = require('./routes/collegename.router');
 
 // Express middleware
 app.use(express.json());
+app.use((req, res, next)=>{
+  console.log(req.method, req.url);
+  console.log(req.body);
+  next();
+})
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -21,6 +28,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/college-major', collegeMajorRouter);
+app.use('/api/college-name', collegeNameRouter);
 
 // Serve static files
 app.use(express.static('build'));

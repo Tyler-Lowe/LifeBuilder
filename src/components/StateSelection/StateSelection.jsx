@@ -1,16 +1,67 @@
 import * as React from 'react';
+import useEffect from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import { useHistory } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux';
+
 
 export default function StateSelection() {
-  const [age, setAge] = React.useState('');
+  const dispatch = useDispatch();
+  const [state, setState] = React.useState('');
+  const [college, setCollege] = React.useState('');
+  const [major, setMajor] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_COLLEGE_NAME' });
+  }, [dispatch]);
+
+  const collegeMajor = useSelector((store) => store.collegeMajor);
+  const collegeName = useSelector((store) => store.collegeName);
+
+
+
+
+  const allStates = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+    'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+    'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+    'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+    'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  ];
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setState(event.target.value);
+  };
+
+console.log('logging set state here', state);
+
+  const handleCollegeChange = (event) => {
+    setCollege(event.target.value);
+    {collegeMajor.map((collegeMajor, index) => {
+      if (collegeMajor.state === 'Minnesota') {
+        return (
+          <MenuItem key={index} value={collegeMajor.college_name}>
+           {collegeMajor.college_name}
+          </MenuItem>
+        );
+      } else {
+        return (
+          <MenuItem>
+          <em>Make A valid state selection </em>
+         </MenuItem>
+        ) // Return null for other states
+      }
+    })}
+  };
+
+  const handleMajorChange = (event) => {
+    setMajor(event.target.value);
   };
 
   const handleClose = () => {
@@ -20,32 +71,105 @@ export default function StateSelection() {
   const handleOpen = () => {
     setOpen(true);
   };
+  
 
   return (
     <div>
-      <Button sx={{ display: 'block', mt: 2 }} onClick={handleOpen}>
-        Select your state
-      </Button>
       <FormControl sx={{ m: 1, minWidth: 400 }}>
-        {/* <InputLabel id="demo-controlled-open-select-label">major</InputLabel> */}
         <Select 
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
+          value={state}
+          required
           placeholder='Choose your state'
           onChange={handleChange}
         >
           <MenuItem disabled value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Tennessee</MenuItem>
-          <MenuItem value={20}>Minnesota</MenuItem>
-          <MenuItem value={30}>Utah</MenuItem>
+          {allStates.map((state, index) => (
+        <MenuItem key={index} value={state}>{state}</MenuItem>
+      ))}
         </Select>
-      </FormControl>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 400 }}>
+        <Select 
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          // open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={college}
+          required
+          placeholder='Choose your state'
+          onChange={handleCollegeChange}
+        >
+          <MenuItem disabled value="">
+            <em>None</em>
+          </MenuItem>
+
+            {collegeMajor.map((collegeMajor, index) => {
+  if (collegeMajor.state === state) {
+    return (
+      <MenuItem key={index} value={collegeMajor.college_name}>
+       {collegeMajor.college_name}
+      </MenuItem>
+    );
+  } 
+})}
+        </Select>
+        </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 400 }}>
+        <Select 
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          // open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={major}
+          required
+          placeholder='Choose your state'
+          onChange={handleMajorChange}
+        >
+          <MenuItem disabled value="">
+            <em>None</em>
+          </MenuItem>
+
+            {collegeMajor.map((collegeMajor, index) => {
+  if (collegeMajor.college_name) {
+    return (
+      <MenuItem key={index} value={collegeMajor.major_name}>
+       {collegeMajor.major_name}
+      </MenuItem>
+    );
+  } else {
+    return (
+      <MenuItem>
+      <em>Make A valid state selection </em>
+     </MenuItem>
+    ) // Return null for other states
+  }
+})}
+        </Select>
+        <Button
+                        sx={{
+                          backgroundColor: "#f05b6d",
+                          padding: ".5rem 1.25rem",
+                        }}
+                        className="button-main"
+                        variant="contained"
+                        type="button"
+                        onClick={() => {
+                          history.push("/future-preview");
+                        }}
+                      >
+                        Start Your Journey
+                      </Button>
+        </FormControl>
+
     </div>
   );
 }

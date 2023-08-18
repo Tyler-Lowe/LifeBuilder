@@ -2,22 +2,18 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import { Container } from "@mui/material";
-import "./MajorSelection.css";
-import { Dashboard } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import StateSelection from "../StateSelection/StateSelection";
+import { Container } from "@mui/material";
 
-
-function MajorSelection() {
-    const history = useHistory();
-
-    return (
-        <>
-         <div className="background-purple">
+function FuturePreview() {
+  const history = useHistory();
+  return (
+    <>
+      {/* #f0f5fd, purple is #f3edff, new purple */}
+      <div className="background-purple">
         <Container maxWidth="xl">
           <Grid container>
             <Grid
@@ -86,32 +82,56 @@ function MajorSelection() {
                 xl={8}
                 sx={{ backgroundColor: "#f0f5fd", borderRadius: "25px" }}
               >
+               
+                {/* For container Heading */}
+                <Grid item xl={10}>
+                  <h2>Will this be your future</h2>
+                </Grid>
+                {/* End of Container Heading */}
                 <Grid
                   className="db-primary-container"
                   item
                   xl={10}
                   sx={{
                     backgroundColor: "#fffffb",
-                    borderRadius: "25px",
+                    borderRadius: "15px",
                     padding: "1rem",
-                    marginTop: "3rem",
-                    border: "1px solid #f3f3f3",
                   }}
                 >
-                    <h2 className="text-purple">Pick your state, college, and major below!</h2>
+                    <h2>Hey userName!</h2>
+                    <p>How does this future look?</p>
+                  <h2>Name of Chosen Career Field</h2>
+                  <p>Life after graduating with a degreeName degree from universityName living in selectedState</p>
                   <Grid container justifyContent={"center"}>
                     <Grid
                       className=""
                       item
-                      xl={8}
+                      xl={12}
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
-                        <StateSelection />
+                    <h4>* All values are averages</h4>
+                      <p>Avg Salary of "Name of Career": $75000</p>
+                      <p>Monthly Take Home Pay: $4500</p>
+                        <span>Insert Pie Chart of 50/30/20 based on salary</span>
+                        <p>small blurb to support the above text and more info about something here</p>
+                        <Button
+                        sx={{
+                          backgroundColor: "#f05b6d",
+                          padding: ".5rem 1.25rem",
+                        }}
+                        className="button-main"
+                        variant="contained"
+                        type="button"
+                        onClick={() => {
+                          history.push("/dashboard");
+                        }}
+                      >
+                        Add This Future
+                      </Button>
                     </Grid>
                   </Grid>
-                  
                 </Grid>
-                </Grid>
+              </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
                 <div>I am right here! (3)</div>
@@ -120,8 +140,8 @@ function MajorSelection() {
           </Grid>
         </Container>
       </div>
-        </>
-    )
+    </>
+  );
 }
 
-export default MajorSelection;
+export default FuturePreview;

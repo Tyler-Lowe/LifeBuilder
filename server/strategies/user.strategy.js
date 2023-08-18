@@ -8,12 +8,13 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
+  console.log('In desiralized', id);
   pool
     .query('SELECT * FROM "user" WHERE id = $1', [id])
     .then((result) => {
       // Handle Errors
       const user = result && result.rows && result.rows[0];
-
+      console.log(user,'2nd deserialized');
       if (user) {
         // user found
         delete user.password; // remove password so it doesn't get sent
@@ -38,18 +39,22 @@ passport.deserializeUser((id, done) => {
 passport.use(
   'local',
   new LocalStrategy((username, password, done) => {
+    console.log('In local strategy', username, password);
     pool
       .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result) => {
         const user = result && result.rows && result.rows[0];
+        console.log('2nd local strat', user);
         if (user && encryptLib.comparePassword(password, user.password)) {
           // All good! Passwords match!
           // done takes an error (null in this case) and a user
+          console.log('passwords match');
           done(null, user);
         } else {
           // Not good! Username and password do not match.
           // done takes an error (null in this case) and a user (also null in this case)
           // this will result in the server returning a 401 status code
+          console.log('passwords match NOT');
           done(null, null);
         }
       })

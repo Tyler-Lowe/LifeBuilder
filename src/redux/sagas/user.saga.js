@@ -20,6 +20,7 @@ function* fetchUser() {
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  console.log('Test 1')
 }
 
 export default userSaga;

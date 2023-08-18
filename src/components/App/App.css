@@ -166,13 +166,13 @@ input {
   box-shadow: inset 0px 1px 1px 0px rgba(197, 205, 241, 0.1), 0px 50px 100px -20px rgba(197, 205, 241, 0.25), 0px 30px 60px -30px rgba(0, 0, 0, 0.3);
 }
 
-.left-box-shadow {
+/* .left-box-shadow {
   box-shadow: -15px 0 10px -20px rgba(0, 0, 0, 0.45);
-}
+} */
 
-.right-box-shadow {
+/* .right-box-shadow {
   box-shadow: 15px 0 20px -20px rgba(0, 0, 0, 0.45);
-}
+} */
 
 .text-center {
   text-align: center;
