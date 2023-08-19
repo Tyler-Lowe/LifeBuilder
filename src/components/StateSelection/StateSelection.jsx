@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useEffect from 'react';
+import {useEffect} from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
+
 
 
 export default function StateSelection() {
@@ -23,9 +24,7 @@ export default function StateSelection() {
 
   const collegeMajor = useSelector((store) => store.collegeMajor);
   const collegeName = useSelector((store) => store.collegeName);
-
-
-
+  console.log(collegeName, 'College name here is it working?')
 
   const allStates = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
@@ -37,27 +36,14 @@ export default function StateSelection() {
 
   const handleChange = (event) => {
     setState(event.target.value);
+    
   };
 
 console.log('logging set state here', state);
 
   const handleCollegeChange = (event) => {
     setCollege(event.target.value);
-    {collegeMajor.map((collegeMajor, index) => {
-      if (collegeMajor.state === 'Minnesota') {
-        return (
-          <MenuItem key={index} value={collegeMajor.college_name}>
-           {collegeMajor.college_name}
-          </MenuItem>
-        );
-      } else {
-        return (
-          <MenuItem>
-          <em>Make A valid state selection </em>
-         </MenuItem>
-        ) // Return null for other states
-      }
-    })}
+    console.log('logging college names here', collegeName);
   };
 
   const handleMajorChange = (event) => {
@@ -111,11 +97,11 @@ console.log('logging set state here', state);
             <em>None</em>
           </MenuItem>
 
-            {collegeMajor.map((collegeMajor, index) => {
-  if (collegeMajor.state === state) {
+            {collegeName.map((collegeName, index) => {
+  if (collegeName.state === 'Tennessee') {
     return (
-      <MenuItem key={index} value={collegeMajor.college_name}>
-       {collegeMajor.college_name}
+      <MenuItem key={index} value={collegeName.college_name}>
+       {collegeName.college_name}
       </MenuItem>
     );
   } 

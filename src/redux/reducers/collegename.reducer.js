@@ -1,4 +1,4 @@
-const collegeNameReducer = (state = {}, action) => {
+const collegeNameReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_COLLEGE_NAME':
         return action.payload;

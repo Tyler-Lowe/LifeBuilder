@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
     try {
         // Query the database to retrieve college majors
         const queryResult = await pool.query(` SELECT college_name FROM college;
-
     `);
+    // console.log('College names here is it working', res.json(queryResult.rows))
         // Send the query result as the response
         res.json(queryResult.rows);
       } catch (error) {

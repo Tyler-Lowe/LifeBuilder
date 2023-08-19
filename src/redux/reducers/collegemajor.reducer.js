@@ -1,4 +1,4 @@
-const majorReducer = (state = {}, action) => {
+const majorReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_MAJOR':
         return action.payload;

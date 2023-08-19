@@ -14,15 +14,15 @@ function* fetchCollegeName() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_COLLEGE_NAME', payload: collegeName});
-    console.log('is this where that payload is being set?', collegeName)
+    console.log('is this where that payload is being set for college name?', collegeName)
   } catch (error) {
     console.log('College name get request failed', error);
   }
 }
 
-function* collegeMajorSaga() {
+function* collegeNameSaga() {
     console.log('Are we in the college major saga?');
   yield takeLatest('FETCH_COLLEGE_NAME', fetchCollegeName);
 }
 
-export default collegeMajorSaga;
+export default collegeNameSaga;
