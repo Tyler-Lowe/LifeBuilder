@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import {useEffect} from 'react';
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,8 +10,19 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import HomeIcon from '@mui/icons-material/Home';
 import "./Dashboard.css";
 import { Container } from "@mui/material";
+import {useSelector, useDispatch} from 'react-redux';
+
 
 function Dashboard() {
+const dispatch = useDispatch();
+const user = useSelector((store) => store.user);
+const userFutureData = useSelector((store) => store.userFuture);
+console.log('Eyes ehre',userFutureData);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER_FUTURE' });
+  }, [dispatch]);
+
   return (
     <>
       {/* #f0f5fd, purple is #f3edff, new purple */}
@@ -103,7 +115,7 @@ function Dashboard() {
                     padding: "1rem",
                   }}
                 >
-                  <h2>Name of Chosen Career Field</h2>
+                  <h2>{userFutureData.map(item => item.college_major)}</h2>
                   <p>University Name</p>
                   <p>Degree Name</p>
                   <Grid container justifyContent={"center"}>
@@ -202,7 +214,7 @@ function Dashboard() {
               </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
-                <div>I am right here! (3)</div>
+              <div>Howdy, <span>{user.first_name}!</span></div>
               </Grid>
             </Grid>
           </Grid>

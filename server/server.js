@@ -10,6 +10,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const collegeMajorRouter = require('./routes/collegemajor.router');
 const collegeNameRouter = require('./routes/collegename.router');
+const userFutureRouter = require('./routes/userfuture.router');
 
 // Express middleware
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/college-major', collegeMajorRouter);
 app.use('/api/college-name', collegeNameRouter);
+app.use('/api/user-future', userFutureRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -7,6 +7,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { Container } from "@mui/material";
+import {useSelector, useDispatch} from 'react-redux';
 
 function FuturePreview() {
   const history = useHistory();

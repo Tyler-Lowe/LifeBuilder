@@ -95,10 +95,11 @@ function MajorSelection() {
                     borderRadius: "25px",
                     padding: "1rem",
                     marginTop: "3rem",
+                    marginBottom: "3rem",
                     border: "1px solid #f3f3f3",
                   }}
                 >
-                    <h2 className="text-purple">Pick your state, college, and major below!</h2>
+                    <h2 className="text-purple">Let's get started building your future!</h2>
                   <Grid container justifyContent={"center"}>
                     <Grid
                       className=""

@@ -28,8 +28,8 @@ import UserHomePage from '../UserHomePage/UserHomePage';
 
 function App() {
   const dispatch = useDispatch();
-
   const user = useSelector(store => store.user);
+  
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -87,7 +87,7 @@ function App() {
             exact
             path="/college-major-selection"
           >
-            <MajorSelection />
+            <MajorSelection/>
           </Route>
 
           <Route
