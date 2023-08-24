@@ -83,7 +83,9 @@ console.log('logging set state here', state);
         salary: salary,
       },
     });
-    history.push("/future-preview");
+    setTimeout(() => {
+      history.push("/dashboard");
+    }, 100);
   }; // end UPDATE USER FUTURE
 
 

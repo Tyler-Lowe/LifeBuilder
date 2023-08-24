@@ -11,7 +11,7 @@ function Nav() {
   return (
     <Container maxWidth='xl' >
     <div className="nav">
-      <Link to="/home">
+      <Link to="/homepage">
         <h2 className="nav-title">LifeBuilder</h2>
       </Link>
       <div>

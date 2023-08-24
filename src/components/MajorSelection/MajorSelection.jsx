@@ -5,15 +5,19 @@ import Button from "@mui/material/Button";
 import { Container } from "@mui/material";
 import "./MajorSelection.css";
 import { Dashboard } from "@mui/icons-material";
+import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from "@mui/icons-material/Add";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import StateSelection from "../StateSelection/StateSelection";
+import {useSelector, useDispatch} from 'react-redux';
+import plannerImg from '../../images/profile-img.png'
 
 
 function MajorSelection() {
     const history = useHistory();
+    const user = useSelector((store) => store.user);
 
     return (
         <>
@@ -28,6 +32,7 @@ function MajorSelection() {
               sx={{
                 backgroundColor: "#fffffb",
                 marginTop: "3rem",
+                marginBottom: "4rem",
                 borderRadius: "25px",
               }}
             >
@@ -61,19 +66,14 @@ function MajorSelection() {
                     </Button>
                   </Grid>
                 </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <GridViewIcon /> <span>Dashboard</span>
+                <Grid container marginTop={"1.5rem"} justifyContent={"left"}>
+                  <Grid container marginBottom={".25rem"} alignItems={'center'} justifyContent={'center'} item xl={10}>
+                    <HomeIcon /> <a href="#/homepage"><span>Home</span></a>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent={"center"}>
                   <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <Face5Icon /> <span>Activity</span>
-                  </Grid>
-                </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <AutoStoriesIcon /> <span>My Story</span>
+                    <GridViewIcon /> <a href="#/dashboard"><span>Dashboard</span></a>
                   </Grid>
                 </Grid>
               </Grid>
@@ -115,7 +115,12 @@ function MajorSelection() {
                 </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
-                <div>I am right here! (3)</div>
+              <div className="text-center username-margin">Howdy, <span>{user.first_name}!</span>
+              <div >
+              <img className="profile-img" src={plannerImg} alt="Image of a planner" />
+              </div>
+              
+              </div>
               </Grid>
             </Grid>
           </Grid>

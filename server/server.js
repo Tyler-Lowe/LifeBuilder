@@ -11,6 +11,8 @@ const userRouter = require('./routes/user.router');
 const collegeMajorRouter = require('./routes/collegemajor.router');
 const collegeNameRouter = require('./routes/collegename.router');
 const userFutureRouter = require('./routes/userfuture.router');
+const updateUserFutureRouter = require('./routes/updateuserfuture.router');
+const deleteUserFutureRouter = require('./routes/deletefuture.router');
 
 // Express middleware
 app.use(express.json());
@@ -32,6 +34,8 @@ app.use('/api/user', userRouter);
 app.use('/api/college-major', collegeMajorRouter);
 app.use('/api/college-name', collegeNameRouter);
 app.use('/api/user-future', userFutureRouter);
+app.use('/api/update-user-future', updateUserFutureRouter);
+app.use('/api/delete-user-future', deleteUserFutureRouter);
 
 // Serve static files
 app.use(express.static('build'));

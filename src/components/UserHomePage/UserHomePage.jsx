@@ -9,6 +9,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import HomeIcon from '@mui/icons-material/Home';
 import { Container } from "@mui/material";
 import {useSelector, useDispatch} from 'react-redux';
+import plannerImg from '../../images/profile-img.png'
 
 
 
@@ -63,24 +64,14 @@ function UserHomePage() {
                     </Button>
                   </Grid>
                 </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <HomeIcon /> <span>Home</span>
+                <Grid container marginTop={"1.5rem"} justifyContent={"left"}>
+                  <Grid container marginBottom={".25rem"} alignItems={'center'} justifyContent={'center'} item xl={10}>
+                    <HomeIcon /> <a href="#/homepage"><span>Home</span></a>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent={"center"}>
                   <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <GridViewIcon /> <span>Dashboard</span>
-                  </Grid>
-                </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <Face5Icon /> <span>Activity</span>
-                  </Grid>
-                </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <AutoStoriesIcon /> <span>My Story</span>
+                    <GridViewIcon /> <a href="#/dashboard"><span>Dashboard</span></a>
                   </Grid>
                 </Grid>
               </Grid>
@@ -114,8 +105,7 @@ function UserHomePage() {
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
                       <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Earum ad cumque veniam. Nostrum accusantium debitis.
+                      Choosing the right major is crucial for shaping your future. It's about combining your interests and strengths with career potential. Research fields, seek advice, and find a balance between passion and practicality. Your major can be a stepping stone to a fulfilling and successful path ahead.
                       </p>
                     </Grid>
                     <Grid
@@ -166,7 +156,14 @@ function UserHomePage() {
                       xl={12}
                       sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
                     >
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet odio vel praesentium aspernatur numquam, ad perferendis harum, dignissimos voluptates a consequatur blanditiis vitae. Natus alias id nesciunt minima repellendus.</p>
+                      <p>Choosing a major is a pivotal decision with far-reaching implications for your academic and professional journey. To navigate this process effectively, consider the following insights:
+                      <br /> <br />
+Begin with Self-Reflection: Delve into your passions, interests, and strengths. Consider the activities that bring you joy and the subjects that pique your curiosity.
+<br /> <br />
+Explore Career Avenues: Investigate potential career paths that resonate with your interests. Research job descriptions, required skills, and potential earnings to gauge their compatibility.
+<br /> <br />
+Assess Your Abilities: Take stock of your existing skills and the ones you wish to cultivate. Opt for a major that aligns with your strengths and allows room for skill enhancement.
+</p>
                     </Grid>
                     <Grid
                       textAlign={"center"}
@@ -179,59 +176,16 @@ function UserHomePage() {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid
-                  className="db-primary-container"
-                  item
-                  xl={10}
-                  sx={{
-                    backgroundColor: "#fffffb",
-                    borderRadius: "15px",
-                    padding: "1rem",
-                    marginTop: "3rem",
-                  }}
-                >
-                  <h2>Name of Chosen Career Field</h2>
-                  <Grid container justifyContent={"center"}>
-                    <Grid
-                      className=""
-                      item
-                      xl={8}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Earum ad cumque veniam. Nostrum accusantium debitis.
-                      </p>
-                    </Grid>
-                    <Grid
-                      textAlign={"center"}
-                      className=""
-                      item
-                      xl={4}
-                      alignSelf={"center"}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
-                      <Button
-                        sx={{
-                          backgroundColor: "#f05b6d",
-                          padding: ".5rem 1.25rem",
-                        }}
-                        className="button-main"
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          history.push("/registration");
-                        }}
-                      >
-                        Start Your Journey
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
+           
               </Grid>
               {/* End of Middle Column */}
               <Grid className="left-box-shadow" item xl={2}>
-                <div>Howdy, <span>{user.first_name}!</span></div>
+              <div className="text-center username-margin">Howdy, <span>{user.first_name}!</span>
+              <div >
+              <img className="profile-img" src={plannerImg} alt="Image of a planner" />
+              </div>
+              
+              </div>
                 {/* <div>Howdy, <span>{collegeMajor[0].major_name}!</span></div> */}
                 {/* <div>
                     {collegeMajor.map((collegeMajor, index) => (

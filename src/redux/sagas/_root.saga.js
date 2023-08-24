@@ -6,6 +6,8 @@ import collegeMajorSaga from './collegemajor.saga';
 import collegeNameSaga from './collegename.saga'
 import updateUserFutureSaga from './userfuture.saga';
 import fetchUserFutureSaga from './fetchuserfuture.saga';
+import addToUserFutureSaga from './updateuserfuture.saga';
+import deleteFutureSaga from './deletefuture.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +25,7 @@ export default function* rootSaga() {
     collegeNameSaga(),
     updateUserFutureSaga(),
     fetchUserFutureSaga(),
+    addToUserFutureSaga(),
+    deleteFutureSaga(),
   ]);
 }
