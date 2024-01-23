@@ -8,6 +8,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const stateNameRouter = require('./routes/statename.router');
 const collegeMajorRouter = require('./routes/collegemajor.router');
 const collegeNameRouter = require('./routes/collegename.router');
 const userFutureRouter = require('./routes/userfuture.router');
@@ -31,6 +32,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/state-name', stateNameRouter);
 app.use('/api/college-major', collegeMajorRouter);
 app.use('/api/college-name', collegeNameRouter);
 app.use('/api/user-future', userFutureRouter);

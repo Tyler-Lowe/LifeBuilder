@@ -19,6 +19,6 @@ CREATE TABLE "colleges" (
 
 CREATE TABLE "college_majors" (
     "id" SERIAL PRIMARY KEY,
-    "college_name" VARCHAR (80) NOT NULL,
+    "college_major" VARCHAR (80) NOT NULL,
     "state" VARCHAR (1000) NOT NULL,
 );
