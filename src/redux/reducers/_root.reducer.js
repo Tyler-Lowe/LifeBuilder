@@ -3,7 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import collegeMajor from './collegemajor.reducer'
 import stateNameReducer from './statename.reducer'
-import collegeName from './collegename.reducer'
+import collegeNameReducer from './collegename.reducer'
 import userFuture from './userfuture.reducer'
 
 
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   collegeMajor,
   stateName: stateNameReducer,
-  collegeName,
+  collegeName: collegeNameReducer,
   userFuture,
 
 });
