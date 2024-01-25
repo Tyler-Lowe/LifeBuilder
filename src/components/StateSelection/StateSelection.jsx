@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function StateSelection() {
   const dispatch = useDispatch();
   const [selectedState, setSelectedState] = useState('');
+  const [selectedCollege, setSelectedCollege] = useState('');
 
   // Fetch state names from the database
   useEffect(() => {
@@ -21,11 +22,17 @@ export default function StateSelection() {
     dispatch({ type: 'FETCH_COLLEGE_NAME', payload: selectedState });
   }, [selectedState, dispatch]);
 
+  // Fetch college major from database
+  useEffect(() => {
+    if(selectedCollege)
+    dispatch({ type: 'FETCH_COLLEGE_MAJOR', payload: selectedCollege });
+  }, [selectedCollege, dispatch]);
 
   // This stores all the states that were fetched from the db
   const stateNames = useSelector((store) => store.stateName);
   const collegeNames = useSelector((store) => store.collegeName);
-  console.log(collegeNames, 'Tyler Look here for college names');
+  const collegeMajors = useSelector((store) => store.collegeMajor);
+  console.log(collegeMajors, 'Tyler Look here for college Majors');
 
   // Filter for unique state names and sort a-z
   const uniqueStateNames = stateNames
@@ -42,6 +49,11 @@ export default function StateSelection() {
     setSelectedState(event.target.value)
   };
 
+  // This event handler stores the selected college that the user selected
+  const handleChangeCollege = (event) => {
+    setSelectedCollege(event.target.value)
+  };
+
   const menuItems = uniqueStateNames.map((item, index) => (
     <MenuItem key={index} value={item.state}>
       {item.state}
@@ -53,6 +65,12 @@ export default function StateSelection() {
     {item.college_name}
   </MenuItem>
   ));
+
+  const collegeMajorMenu = collegeMajors.map((item, index) => (
+    <MenuItem key={index} value={item.college_major}>
+      {item.college_major}
+    </MenuItem>
+    ));
 
   return (
     <>
@@ -69,14 +87,20 @@ export default function StateSelection() {
         <Select
           labelId="college-select-label"
           id="college-select"
-          // onChange={handleChange}
+          onChange={handleChangeCollege}
           label="College"
         >
           {collegeMenu}
         </Select>
+        <Select
+          labelId="college-select-label"
+          id="college-select"
+          label="College"
+        >
+          {collegeMajorMenu}
+        </Select>
+        <button>Submit</button>
       </FormControl>
-
-      {/* Add more of your component logic here */}
     </>
   );
 }

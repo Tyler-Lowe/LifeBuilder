@@ -16,7 +16,7 @@ import userFuture from './userfuture.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  collegeMajor,
+  collegeMajor: collegeMajor,
   stateName: stateNameReducer,
   collegeName: collegeNameReducer,
   userFuture,

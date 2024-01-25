@@ -1,6 +1,6 @@
 const majorReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_MAJOR':
+      case 'SET_COLLEGE_MAJOR':
         return action.payload;
       default:
         return state;
