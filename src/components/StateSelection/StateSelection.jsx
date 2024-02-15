@@ -4,12 +4,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function StateSelection() {
   const dispatch = useDispatch();
   const [selectedState, setSelectedState] = useState('');
   const [selectedCollege, setSelectedCollege] = useState('');
+  const [selectedMajor, setSelectedMajor] = useState('');
 
   // Fetch state names from the database
   useEffect(() => {
@@ -18,30 +20,30 @@ export default function StateSelection() {
 
   // Fetch college name from database
   useEffect(() => {
-    if(selectedState)
-    dispatch({ type: 'FETCH_COLLEGE_NAME', payload: selectedState });
+    if (selectedState)
+      dispatch({ type: 'FETCH_COLLEGE_NAME', payload: selectedState });
   }, [selectedState, dispatch]);
 
   // Fetch college major from database
   useEffect(() => {
-    if(selectedCollege)
-    dispatch({ type: 'FETCH_COLLEGE_MAJOR', payload: selectedCollege });
+    if (selectedCollege)
+      dispatch({ type: 'FETCH_COLLEGE_MAJOR', payload: selectedCollege });
   }, [selectedCollege, dispatch]);
 
   // This stores all the states that were fetched from the db
   const stateNames = useSelector((store) => store.stateName);
   const collegeNames = useSelector((store) => store.collegeName);
   const collegeMajors = useSelector((store) => store.collegeMajor);
-  console.log(collegeMajors, 'Tyler Look here for college Majors');
+
 
   // Filter for unique state names and sort a-z
   const uniqueStateNames = stateNames
-  .filter((item, index, self) =>
-    index === self.findIndex((t) => (
-      t.state === item.state
-    ))
-  )
-  .sort((a, b) => a.state.localeCompare(b.state));
+    .filter((item, index, self) =>
+      index === self.findIndex((t) => (
+        t.state === item.state
+      ))
+    )
+    .sort((a, b) => a.state.localeCompare(b.state));
 
   // event handler for when a state is selected from the menu it will store that selection 
   // and the state array will change which will fire the "FETCH-COLLEGE-NAME" useEffect hook
@@ -54,6 +56,14 @@ export default function StateSelection() {
     setSelectedCollege(event.target.value)
   };
 
+  const handleChangeMajor = (event) => {
+    setSelectedMajor(event.target.value)
+  };
+
+  const handleSubmit = () => {
+    setUserSelections()
+  }
+
   const menuItems = uniqueStateNames.map((item, index) => (
     <MenuItem key={index} value={item.state}>
       {item.state}
@@ -61,46 +71,61 @@ export default function StateSelection() {
   ));
 
   const collegeMenu = collegeNames.map((item, index) => (
-  <MenuItem key={index} value={item.college_name}>
-    {item.college_name}
-  </MenuItem>
+    <MenuItem key={index} value={item.college_name}>
+      {item.college_name}
+    </MenuItem>
   ));
 
   const collegeMajorMenu = collegeMajors.map((item, index) => (
     <MenuItem key={index} value={item.college_major}>
       {item.college_major}
     </MenuItem>
-    ));
+  ));
 
   return (
     <>
-      <FormControl fullWidth>
-        <InputLabel id="state-select-label">State</InputLabel>
-        <Select
-          labelId="state-select-label"
-          id="state-select"
-          onChange={handleChange}
-          label="State"
-        >
-          {menuItems}
-        </Select>
-        <Select
-          labelId="college-select-label"
-          id="college-select"
-          onChange={handleChangeCollege}
-          label="College"
-        >
-          {collegeMenu}
-        </Select>
-        <Select
-          labelId="college-select-label"
-          id="college-select"
-          label="College"
-        >
-          {collegeMajorMenu}
-        </Select>
-        <button>Submit</button>
-      </FormControl>
+      <div>
+        <FormControl fullWidth className='m-b-l'>
+          <InputLabel id="state-select-label">State</InputLabel>
+          <Select
+            labelId="state-select-label"
+            id="state-select"
+            onChange={handleChange}
+            className='m-b-l'
+          >
+            {menuItems}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth className='m-b-l' disabled={!selectedState}>
+          <InputLabel id="college-select-label">College</InputLabel>
+          <Select
+            labelId="college-select-label"
+            id="college-select"
+            onChange={handleChangeCollege}
+            className='m-b-l'
+          >
+            {collegeMenu}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth className='m-b-l'  disabled={!selectedCollege}>
+          <InputLabel id="college-major-select-label">Major</InputLabel>
+          <Select
+            labelId="college-major-select-label"
+            id="major-select"
+            onChange={handleChangeMajor}
+            className='m-b-l'
+          >
+            {collegeMajorMenu}
+          </Select>
+        </FormControl>
+
+        <Button  disabled={!selectedCollege || !selectedState || !selectedMajor} 
+        onClick={handleSubmit}
+        >Submit</Button>
+      </div>
+
     </>
   );
 }

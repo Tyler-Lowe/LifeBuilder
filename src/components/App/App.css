@@ -192,3 +192,7 @@ input {
   border: 4px solid #4200cd ;
   margin-top: 1rem;
 }
+
+.m-b-l {
+  margin-bottom: 1rem;
+}

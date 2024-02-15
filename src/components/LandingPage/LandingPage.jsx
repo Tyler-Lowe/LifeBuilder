@@ -69,8 +69,7 @@ Align your career aspirations with your desired lifestyle for a fulfilling journ
               </Grid>
               <Grid alignSelf={'center'} item xl={6}>
               <p>For high school students on the cusp of embarking on their higher education odyssey, our app is a guiding light that simplifies the complex process of major selection. Navigating the myriad of choices can be overwhelming, but with our user-centric platform, students can now envision their future lifestyle and seamlessly match it with the ideal major.
-
-</p>
+              </p>
               </Grid>
             </Grid>
             <Grid justifyContent={'center'} container>
