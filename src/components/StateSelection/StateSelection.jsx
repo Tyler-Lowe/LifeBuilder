@@ -6,10 +6,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 export default function StateSelection() {
+
+  const history = useHistory();
   const dispatch = useDispatch();
-  const [selectedState, setSelectedState] = useState('');
+  const [selectedState, setSelectedState] = useState("");
   const [selectedCollege, setSelectedCollege] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
 
@@ -35,7 +38,7 @@ export default function StateSelection() {
   const collegeNames = useSelector((store) => store.collegeName);
   const collegeMajors = useSelector((store) => store.collegeMajor);
 
-  console.log(stateNames, 'Tyler state here??');
+  console.log(selectedState, selectedCollege, selectedMajor, 'Tyler state here?? IS THE STATE DUDE');
 
   // Filter for unique state names and sort a-z
   const uniqueStateNames = stateNames
@@ -62,8 +65,10 @@ export default function StateSelection() {
     setSelectedMajor(event.target.value)
   };
 
-  const handleSubmit = () => {
-    setUserSelections()
+  //
+  const handleSubmit = async () => {
+    await dispatch({  type: 'SET_USER_SELECTIONS', payload: {  selectedState, selectedCollege, selectedMajor}  })
+    history.push('/future-preview')
   }
 
   const menuItems = uniqueStateNames.map((item, index) => (
@@ -80,7 +85,7 @@ export default function StateSelection() {
 
   const collegeMajorMenu = collegeMajors.map((item, index) => (
     <MenuItem key={index} value={item.major_name}>
-      {item.major_name}
+      {item.major_name} 
     </MenuItem>
   ));
 
@@ -92,6 +97,7 @@ export default function StateSelection() {
           <Select
             labelId="state-select-label"
             id="state-select"
+            value={selectedState}
             onChange={handleChange}
             className='m-b-l'
           >
@@ -104,6 +110,7 @@ export default function StateSelection() {
           <Select
             labelId="college-select-label"
             id="college-select"
+            value={selectedCollege}
             onChange={handleChangeCollege}
             className='m-b-l'
           >
@@ -116,6 +123,7 @@ export default function StateSelection() {
           <Select
             labelId="college-major-select-label"
             id="major-select"
+            value={selectedMajor}
             onChange={handleChangeMajor}
             className='m-b-l'
           >

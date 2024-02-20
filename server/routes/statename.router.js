@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
         const queryResult = await pool.query(` SELECT state_name FROM public.states;
       
     `)
-    console.log(queryResult);
     ;
     // console.log('College names here is it working', res.json(queryResult.rows))
         // Send the query result as the response

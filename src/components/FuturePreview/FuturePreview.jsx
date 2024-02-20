@@ -11,6 +11,13 @@ import {useSelector, useDispatch} from 'react-redux';
 
 function FuturePreview() {
   const history = useHistory();
+  const user = useSelector((store) => store.user);
+  const userSelections = useSelector((state) => state.userSelections);
+
+  // Check if userSelections is defined before destructuring
+  const { selectedState, selectedCollege, selectedMajor } = userSelections;
+
+  console.log(userSelections, 'Tyler Your major should be here')
   return (
     <>
       {/* #f0f5fd, purple is #f3edff, new purple */}
@@ -99,9 +106,9 @@ function FuturePreview() {
                     padding: "1rem",
                   }}
                 >
-                    <h2>Hey userName!</h2>
+                    <h2>Hey {user.first_name}!</h2>
                     <p>How does this future look?</p>
-                  <h2>Name of Chosen Career Field</h2>
+                  <h2>{selectedMajor} why you not show?</h2>
                   <p>Life after graduating with a degreeName degree from universityName living in selectedState</p>
                   <Grid container justifyContent={"center"}>
                     <Grid
