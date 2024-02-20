@@ -6,8 +6,11 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         // Query the database to retrieve college majors
-        const queryResult = await pool.query(` SELECT state FROM college_state_link;
-    `);
+        const queryResult = await pool.query(` SELECT state_name FROM public.states;
+      
+    `)
+    console.log(queryResult);
+    ;
     // console.log('College names here is it working', res.json(queryResult.rows))
         // Send the query result as the response
         res.json(queryResult.rows);

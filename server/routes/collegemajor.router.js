@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
         // Query the database to retrieve college majors
         const queryText = `
-        SELECT cm.college_major, cm.average_salary
+        SELECT cm.major_name, cm.average_salary
         FROM colleges AS c
         JOIN college_major_link AS cml ON c.id = cml.college_id
         JOIN college_majors AS cm ON cml.major_id = cm.id

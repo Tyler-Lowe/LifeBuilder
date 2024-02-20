@@ -16,9 +16,10 @@ router.get('/', async (req, res) => {
         // Query the database to retrieve college majors
         const queryText = `
         SELECT c.college_name
-        FROM college_state_link as csl
-        JOIN colleges as c ON csl.college_id = c.id
-        WHERE csl.state = $1;
+        FROM college_state_link AS csl
+        JOIN colleges AS c ON csl.college_id = c.id
+        JOIN states AS s ON csl.state_id = s.id
+        WHERE s.state_name = $1;
         `;
         const queryResult = await pool.query(queryText, [state]);
     // console.log('College names here is it working', res.json(queryResult.rows))

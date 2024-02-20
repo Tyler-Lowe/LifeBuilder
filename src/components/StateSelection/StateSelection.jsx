@@ -35,15 +35,17 @@ export default function StateSelection() {
   const collegeNames = useSelector((store) => store.collegeName);
   const collegeMajors = useSelector((store) => store.collegeMajor);
 
+  console.log(stateNames, 'Tyler state here??');
 
   // Filter for unique state names and sort a-z
   const uniqueStateNames = stateNames
-    .filter((item, index, self) =>
-      index === self.findIndex((t) => (
-        t.state === item.state
-      ))
-    )
-    .sort((a, b) => a.state.localeCompare(b.state));
+  .filter((item, index, self) =>
+    index === self.findIndex((t) => (
+      t.state_name === item.state_name // Adjust this line
+    ))
+  )
+  .sort((a, b) => a.state_name.localeCompare(b.state_name)); // Adjust this line
+
 
   // event handler for when a state is selected from the menu it will store that selection 
   // and the state array will change which will fire the "FETCH-COLLEGE-NAME" useEffect hook
@@ -65,8 +67,8 @@ export default function StateSelection() {
   }
 
   const menuItems = uniqueStateNames.map((item, index) => (
-    <MenuItem key={index} value={item.state}>
-      {item.state}
+    <MenuItem key={index} value={item.state_name}>
+      {item.state_name}
     </MenuItem>
   ));
 
@@ -77,12 +79,12 @@ export default function StateSelection() {
   ));
 
   const collegeMajorMenu = collegeMajors.map((item, index) => (
-    <MenuItem key={index} value={item.college_major}>
-      {item.college_major}
+    <MenuItem key={index} value={item.major_name}>
+      {item.major_name}
     </MenuItem>
   ));
 
-  return (
+  return ( 
     <>
       <div>
         <FormControl fullWidth className='m-b-l'>
