@@ -2,7 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_Major" actions
 function* addToUserFuture(action) {
-    console.log('!!!!!Are we in the ADD TO');
+    console.log('!!!!!Are we in the ADD TO', action.payload);
     try {
         // Make an API call to update the user_future_table
         yield call(fetch, '/api/update-user-future', {

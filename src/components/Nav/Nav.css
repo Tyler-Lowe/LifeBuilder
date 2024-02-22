@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  height: 75px;
   margin: 0 0 0px;
   background-color: #fffffb;
   overflow: hidden;

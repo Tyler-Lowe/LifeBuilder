@@ -24,16 +24,21 @@ function Dashboard() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER_FUTURE' })
   }, [dispatch]);
+  
   const userFutureData = useSelector((store) => store.userFuture);
   const [selectedMajor, setSelectedMajor] = useState("");
+  const [selectedCollege, setSelectedCollege] = useState("");
   const handleCollegeMajorChange = (event) => {
     // setMajor(event.target.value);
     setSelectedMajor(event.target.value);
+    
+    
   };
 console.log('Tyler Here', userFutureData.avg_monthly_mortgage);
   useEffect(() => {
     if (userFutureData.length > 0) {
       setSelectedMajor(userFutureData[userFutureData.length - 1].college_major);
+      setSelectedCollege(userFutureData[userFutureData.length - 1].college_name);
       setEditableMortgagePayment(userFutureData[userFutureData.length - 1].avg_monthly_mortgage)
       setEditableCarPayment(userFutureData[userFutureData.length - 1].avg_monthly_car_payment)
       setEditableCarInsurance(userFutureData[userFutureData.length - 1].avg_monthly_car_insurance)
@@ -51,7 +56,7 @@ console.log('Eyes ehre',userFutureData);
 // Mortgage
 const [editableMortgagePayment, setEditableMortgagePayment] = React.useState(
   userFutureData.avg_monthly_mortgage
-);
+); 
 // Car Payment
 const [editableCarPayment, setEditableCarPayment] = React.useState(
   userFutureData.avg_monthly_car_payment
@@ -103,12 +108,9 @@ const deleteThisFuture = (event) => {
   });
 }; // end UPDATE USER FUTURE
 
+
 console.log('Is INSURANCE RIGHT?', editableCarInsurance)
 
-
-if (!userFutureData.length) {
-  return <div>Loading...</div>;
-}
   return (
     <>
       {/* #f0f5fd, purple is #f3edff, new purple */}
@@ -202,7 +204,7 @@ onChange={handleCollegeMajorChange}
 >
   {userFutureData.map((futureData, index) => (
     <MenuItem key={index} value={futureData.college_major}>
-      {futureData.college_major}
+      {futureData.college_name + ' ' + '-' + ' ' + futureData.college_major}
     </MenuItem>
   ))}
 </Select>

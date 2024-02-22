@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Dashboard from '../Dashboard/Dashboard';
 import FuturePreview from '../FuturePreview/FuturePreview';
+import SideNavColumn from '../SideNavColumn/SideNavColumn';
 
 import './App.css';
 import MajorSelection from '../MajorSelection/MajorSelection';

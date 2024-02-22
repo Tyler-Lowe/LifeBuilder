@@ -7,12 +7,21 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  height: 100%;
 }
 
 img {
   display: inline-block;
   max-width: 100%;
 }
+
+/* App.css */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 
 /* --------------------------------------------------------------------------------
 Container
@@ -154,8 +163,12 @@ input {
   background-color: #007ea9;
 }
 
-.background-purple {
-  background-color: #8f8ae8;
+.background-grey {
+  background-color: #EEEEEE;
+}
+
+.background-primary-white{
+  background-color: #fffffb;
 }
 
 /* .db-heading {
@@ -195,4 +208,28 @@ input {
 
 .m-b-l {
   margin-bottom: 1rem;
+}
+
+.rounded-corners {
+  border-radius: 10px;
+}
+
+.m-r-lg {
+  margin-right: 1rem;
+}
+
+.p-l-lg {
+  padding-left: 1rem;
+}
+
+.p-b-xl {
+  padding-bottom: 3rem;
+}
+
+.text-bold {
+  font-weight: bolder;
+}
+
+.underline {
+  text-decoration: underline;
 }
