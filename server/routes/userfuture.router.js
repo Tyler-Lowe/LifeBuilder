@@ -9,7 +9,9 @@ router.get('/', async (req, res) => {
       
       const queryText = `
         SELECT * FROM "user_future_table"
-        WHERE user_id = $1`;
+        WHERE user_id = $1
+        ORDER BY id ASC
+        `;
       
       const queryResult = await pool.query(queryText, [userId]);
       
@@ -31,12 +33,12 @@ router.post('/', (req, res) => {
   const major = req.body.selectedMajor;
   const collegeDescription = req.body.selectedMajorDescription;
   const salary = req.body.selectedMajorSalary;
-  const avgMortgage = 1500;
-  const avgGroceries = 400;
-  const avgUtilities = 150;
-  const avgCarPayments = 400;
-  const avgCarInsurance = 125;
-  const avgStudentLoanPayment = 300;
+  const avgMortgage = null;
+  const avgGroceries = null;
+  const avgUtilities = null;
+  const avgCarPayments = null;
+  const avgCarInsurance = null;
+  const avgStudentLoanPayment = null;
 
 
   const queryText = `INSERT INTO "user_future_table" (user_id, state, college_name, college_major, college_major_salary, college_major_description,

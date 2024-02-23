@@ -1,371 +1,172 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import {useEffect} from 'react';
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
-import GridViewIcon from "@mui/icons-material/GridView";
-import Face5Icon from "@mui/icons-material/Face5";
-import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import HomeIcon from '@mui/icons-material/Home';
+import { Container, FormControl, Select, MenuItem } from "@mui/material";
+import { useSelector, useDispatch } from 'react-redux';
+import SideNavColumn from "../SideNavColumn/SideNavColumn";
+import SideProfileColumn from "../SideProfilecolumn/SideProfileColumn";
+import TextField from '@mui/material/TextField';
+
 import "./Dashboard.css";
-import { Container } from "@mui/material";
-import {useSelector, useDispatch} from 'react-redux';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import plannerImg from '../../images/profile-img.png'
 
 
 function Dashboard() {
-
-  const history = useHistory();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: 'FETCH_USER_FUTURE' })
-  }, [dispatch]);
-  
   const userFutureData = useSelector((store) => store.userFuture);
-  const [selectedMajor, setSelectedMajor] = useState("");
-  const [selectedCollege, setSelectedCollege] = useState("");
-  const handleCollegeMajorChange = (event) => {
-    // setMajor(event.target.value);
-    setSelectedMajor(event.target.value);
-    
-    
-  };
-console.log('Tyler Here', userFutureData.avg_monthly_mortgage);
+
+  // Local state to manage the selected college major
+  const [selectedCollegeMajor, setSelectedCollegeMajor] = useState('');
+  const [selectedId, setSelectedId] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
+  const [selectedCollegeMajorSalary, setSelectedCollegeMajorSalary] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
+
+
+  // Fetch user future on component mount
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER_FUTURE' });
+  }, [dispatch]);
+
+  // Update selectedCollegeMajor when userFutureData changes and has data
   useEffect(() => {
     if (userFutureData.length > 0) {
-      setSelectedMajor(userFutureData[userFutureData.length - 1].college_major);
-      setSelectedCollege(userFutureData[userFutureData.length - 1].college_name);
-      setEditableMortgagePayment(userFutureData[userFutureData.length - 1].avg_monthly_mortgage)
-      setEditableCarPayment(userFutureData[userFutureData.length - 1].avg_monthly_car_payment)
-      setEditableCarInsurance(userFutureData[userFutureData.length - 1].avg_monthly_car_insurance)
-      setEditableGroceries(userFutureData[userFutureData.length - 1].avg_monthy_groceries)
-      setEditableUtilities(userFutureData[userFutureData.length - 1].avg_monthly_utilities)
-      setEditableStudentLoanPayment(userFutureData[userFutureData.length - 1].avg_monthly_student_loan_payment)
+      const lastItem = userFutureData[userFutureData.length - 1];
+      setSelectedCollegeMajor(`${lastItem.college_name} - ${lastItem.college_major}`);
+      setSelectedId(lastItem.id);
+      setSelectedCollegeMajorSalary(lastItem.college_major_salary);
     }
   }, [userFutureData]);
 
-const user = useSelector((store) => store.user);
+  const handleCollegeMajorChange = (event) => {
+    const selectedIndex = userFutureData.findIndex(item => `${item.college_name} - ${item.college_major}` === event.target.value);
+    if (selectedIndex > -1) {
+      const selectedObject = userFutureData[selectedIndex];
+      setSelectedId(selectedObject.id); // Update the state with the selected ID
+      setSelectedCollegeMajorSalary(selectedObject.college_major_salary);
+      setSelectedCollegeMajor(event.target.value); // Update the display value as before
+    }
+  };
 
-console.log('Eyes ehre',userFutureData);
+  console.log(selectedId, 'Tyler object id is here')
 
-// Editable Fields
-// Mortgage
-const [editableMortgagePayment, setEditableMortgagePayment] = React.useState(
-  userFutureData.avg_monthly_mortgage
-); 
-// Car Payment
-const [editableCarPayment, setEditableCarPayment] = React.useState(
-  userFutureData.avg_monthly_car_payment
-);
-// Car Insurance
-const [editableCarInsurance, setEditableCarInsurance] = React.useState(
-  userFutureData.avg_monthly_car_insurance
-);
-// Groceries
-const [editableGroceries, setEditableGroceries] = React.useState(
-  userFutureData.avg_monthy_groceries
-);
-// Utilities
-const [editableUtilities, setEditableUtilities] = React.useState(
-  userFutureData.avg_monthly_utilities
-);
-// Student Loan Payment
-const [editableStudentLoanPayment, setEditableStudentLoanPayment] = React.useState(
-  userFutureData.avg_monthly_student_loan_payment
-);
-// The current row id
-// Student Loan Payment
-const [currentRow, setCurrentRow] = React.useState('');
+  function findDataById(selectedId) {
+    return userFutureData.find(item => item.id === selectedId)
+  }
+  console.log(findDataById(selectedId), 'Tyler this is the find');
 
-// Update user_future_table
-const updateUserFutureTable = (event) => {
+  // Finance Calculations
+  function calculateMonthlyTakeHomePay(salary) {
+    // Federal tax brackets and rates for 2022
+    const taxBrackets = [
+      { min: 0, max: 10000, rate: 0.1 },
+      { min: 10000, max: 40000, rate: 0.12 },
+      { min: 40000, max: 80000, rate: 0.22 },
+      { min: 80000, max: Infinity, rate: 0.24 }
+    ];
 
-  dispatch({
-    type: 'UPDATE_USER_FUTURE_TABLE',
-    payload: {
-      editableMortgagePayment: editableMortgagePayment,
-      editableCarPayment: editableCarPayment,
-      editableCarInsurance: editableCarInsurance,
-      editableGroceries: editableGroceries,
-      editableUtilities: editableUtilities, 
-      editableStudentLoanPayment: editableStudentLoanPayment,
-      currentRow: currentRow
-    },
-  });
-}; // end UPDATE USER FUTURE
+    // Social Security and Medicare rates
+    const socialSecurityRate = 0.062;
+    const medicareRate = 0.0145;
 
-// Delete this future
-const deleteThisFuture = (event) => {
-  dispatch({
-    type: 'DELETE_THIS_ROW',
-    payload: {
-      currentRow: currentRow,
-    },
-  });
-}; // end UPDATE USER FUTURE
+    // Calculate federal income tax
+    let federalIncomeTax = 0;
+    let remainingSalary = salary;
+    for (const bracket of taxBrackets) {
+      if (remainingSalary <= 0) break;
+      const taxableAmount = Math.min(bracket.max - bracket.min, remainingSalary);
+      federalIncomeTax += taxableAmount * bracket.rate;
+      remainingSalary -= taxableAmount;
+    }
+
+    // Calculate Social Security and Medicare tax
+    const socialSecurityTax = salary * socialSecurityRate;
+    const medicareTax = salary * medicareRate;
+
+    // Calculate total taxes
+    const totalFederalTaxes = federalIncomeTax + socialSecurityTax + medicareTax;
+
+    // Calculate monthly take-home pay
+    const monthlyTakeHomePay = (salary - totalFederalTaxes) / 12;
+
+    return monthlyTakeHomePay.toFixed(2); // Return rounded to two decimal places
+  }
+
+  // Example usage:
+  const salary = selectedCollegeMajorSalary; // Example salary
+  const monthlyTakeHomePay = calculateMonthlyTakeHomePay(salary);
+  console.log("Monthly take-home pay:", monthlyTakeHomePay);
+
+  const needs = (monthlyTakeHomePay * 0.5).toFixed(2);
+  const wants = (monthlyTakeHomePay * 0.3).toFixed(2);
+  const savings = (monthlyTakeHomePay * 0.2).toFixed(2);
 
 
-console.log('Is INSURANCE RIGHT?', editableCarInsurance)
+  const pieChartData = {
+    labels: ["50% Needs", "30% Wants", "20% Savings"],
+    datasets: [
+      {
+        data: [needs, wants, savings],
+        backgroundColor: ["#ff6384", "#36a2eb", "#ffce56"],
+        hoverBackgroundColor: ["#ff6384", "#36a2eb", "#ffce56"],
+      },
+    ],
+  };
 
   return (
-    <>
-      {/* #f0f5fd, purple is #f3edff, new purple */}
-      <div className="background-purple">
-        <Container maxWidth="xl">
-          <Grid container>
-            <Grid
-              justifyContent={"center"}
-              container
-              item
-              xl={12}
-              sx={{
-                backgroundColor: "#fffffb",
-                marginTop: "3rem",
-                borderRadius: "25px",
-              }}
-            >
-              <Grid className="right-box-shadow" item xl={2}>
-                <Grid container justifyContent={"center"}>
-                  <Grid item xl={10}>
-                    <h2 className="text-center">Future Plans</h2>
+    <div className="background-grey p-b-xl">
+      <Container maxWidth="xl" spacing={1}>
+        <Grid container>
+          <Grid justifyContent={"center"} container item xl={12} sx={{ marginTop: "3rem", borderRadius: "25px" }}>
+            <SideNavColumn />
+            <Grid justifyContent={"center"} container item xl={8}>
+              <Grid className="db-primary-container" item xl={11} sx={{ backgroundColor: "#fffffb", borderRadius: "10px", padding: "1rem" }}>
+                <h2 className="text-center">Future: {selectedCollegeMajor}</h2>
+                <Grid container>
+                  <Grid item sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}>
+                    <FormControl >
+                      <p className="text-bold">Your Futures:</p>
+                      <Select
+                        value={selectedCollegeMajor}
+                        onChange={handleCollegeMajorChange}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                      >
+                        {userFutureData.map((item, index) => (
+                          <MenuItem key={index} value={`${item.college_name} - ${item.college_major}`}>
+                            {`${item.college_name} - ${item.college_major}`}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    <p>Average Salary: ${selectedCollegeMajorSalary}</p>
+                    <p>Monthly Take Home Pay: ${monthlyTakeHomePay}</p>
                   </Grid>
                 </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid item xl={7}>
-                    <Button
-                      sx={{
-                        backgroundColor: "#d2d0f6",
-                        borderRadius: "25px",
-                        width: "100%",
-                      }}
-                      className="text-center"
-                      onClick={() => {
-                        history.push("/college-major-selection")
-                       
-                      }}
-                    >
-                      <h4>
-                        Add New <br /> Future <br />
-                        <AddIcon
-                          sx={{
-                            backgroundColor: "#8f8ae8",
-                            borderRadius: "50%",
-                            padding: ".25rem",
-                            color: "#fffffb",
-                          }}
+                <Grid container>
+                  <Grid item xl={6}>
+                    <h2 className="text-bold">Needs:</h2>
+                    <Grid container>
+                      <Grid item xl={6}>
+                        <span>Housing: </span>
+                      </Grid>
+                      <Grid item xl={6}>
+                        <TextField
+                          value={monthlyTakeHomePay}
+                          type="number"
                         />
-                      </h4>
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid container marginTop={"1.5rem"} justifyContent={"left"}>
-                  <Grid container marginBottom={".25rem"} alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <HomeIcon /> <a href="#/homepage"><span>Home</span></a>
-                  </Grid>
-                </Grid>
-                <Grid container justifyContent={"center"}>
-                  <Grid container alignItems={'center'} justifyContent={'center'} item xl={10}>
-                    <GridViewIcon /> <a href="#/dashboard"><span>Dashboard</span></a>
-                  </Grid>
-                </Grid>
-              </Grid>
-              {/* Start of Middle Column */}
-              <Grid
-                className=""
-                justifyContent={"center"}
-                container
-                item
-                xl={8}
-                sx={{ backgroundColor: "#f0f5fd", borderRadius: "25px" }}
-              >
-                {/* For container Heading */}
-                <Grid item xl={10}>
-                  {/* <h2>Will this be your future</h2> */}
-                </Grid>
-                {/* End of Container Heading */}
-                <Grid
-                  className="db-primary-container"
-                  item
-                  xl={10}
-                  sx={{
-                    backgroundColor: "#fffffb",
-                    borderRadius: "15px",
-                    padding: "1rem",
-                  }}
-                >
-                  <h2>Select your future!</h2>
-<Select
- value={selectedMajor}
-onChange={handleCollegeMajorChange}
->
-  {userFutureData.map((futureData, index) => (
-    <MenuItem key={index} value={futureData.college_major}>
-      {futureData.college_name + ' ' + '-' + ' ' + futureData.college_major}
-    </MenuItem>
-  ))}
-</Select>
-{userFutureData
-  .filter((futureData) => futureData.college_major === selectedMajor)
-  .map((filteredData, index) => (
-    // Render the filteredData properties here
-    <div key={index}>
-      <div value={currentRow}></div>
-      <h4>My future if I go to {filteredData.college_name} and major in {filteredData.college_major}</h4>
-      <p>Average Annual Salary: <span className="text-green">$</span><span className="text-green">{filteredData.college_major_salary}</span></p>
-      <h2>After Taxes</h2>
-      <p>Monthly Take Home Pay: <span className="text-green">$</span><span className="text-green">{((parseInt(filteredData.college_major_salary) -  (parseInt(filteredData.college_major_salary) * .20)) /12).toFixed(2)}</span></p>
-      <h3>Average Monthly Expenses</h3>
-      <p>These are expenses that you are likely to have but everyones situtation is different. Maybe you have no student loans but you drive a brand new car. Just change the values as needed!</p>
-      <p>
-        Mortgage:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableMortgagePayment}
-          value={editableMortgagePayment}
-          onChange={(event) =>
-            setEditableMortgagePayment(event.target.value)
-          }
-        />
-      </p>
-      <p>
-        Car Payment:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableCarPayment}
-          value={editableCarPayment}
-          onChange={(event) =>
-            setEditableCarPayment(event.target.value)
-          }
-        />
-      </p>
-      <p>
-        Car Insurance:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableCarInsurance}
-          value={editableCarInsurance}
-          onChange={(event) =>
-            setEditableCarInsurance(event.target.value)
-          }
-        />
-      </p>
-      <p>
-        Groceries:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableGroceries}
-          value={editableGroceries}
-          onChange={(event) =>
-            setEditableGroceries(event.target.value)
-          }
-        />
-      </p>
-      <p>
-        Utilities:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableUtilities}
-          value={editableUtilities}
-          onChange={(event) =>
-            setEditableUtilities(event.target.value)
-          }
-        />
-      </p>
-      <p>
-        Student Loan Payment:{" "}
-        <input
-          type="number"
-          step="1"
-          defaultValue={editableStudentLoanPayment}
-          value={editableStudentLoanPayment}
-          onChange={(event) =>
-            setEditableStudentLoanPayment(event.target.value)
-          }
-        />
-      </p>
-      <h3>What's left after the month?</h3>
-      <h1 className="text-green text-center">${((parseInt(filteredData.college_major_salary) -  (parseInt(filteredData.college_major_salary) * .20)) /12).toFixed(0) - parseInt(editableMortgagePayment) - parseInt(editableCarPayment) - parseInt(editableCarInsurance) - parseInt(editableGroceries)  - parseInt(editableUtilities) - parseInt(editableStudentLoanPayment).toFixed(2)}</h1>
-      <div className="text-center">
-      <Button
-                        sx={{
-                          backgroundColor: "#4200cd",
-                          padding: ".5rem 1.25rem",
-                          marginRight: "1rem"
-                        }}
-                        className="button-main"
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          setCurrentRow(filteredData.id)
-                         updateUserFutureTable();
-                         
-                        }}
-                      >
-                        Save Changes
-                      </Button>
-                      <Button
-                        sx={{
-                          backgroundColor: "#f05b6d",
-                          padding: ".5rem 1.25rem",
-                          marginLeft: "1rem"
-                        }}
-                        className="button-main"
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          setCurrentRow(filteredData.id)
-                          deleteThisFuture();
-                        }}
-                      >
-                        Delete Future
-                      </Button>
-                      </div>
-    </div>
-    
-  ))}
-  
-                  
-                 
-                  <Grid container justifyContent={"center"}>
-                    <Grid
-                      textAlign={"center"}
-                      className=""
-                      item
-                      xl={4}
-                      alignSelf={"center"}
-                      sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}
-                    >
+                      </Grid>
+                      
                     </Grid>
-                    
                   </Grid>
-                  
+                  <Grid item xl={6}>
+                  </Grid>
                 </Grid>
-           
-                
-              </Grid>
-              {/* End of Middle Column */}
-              <Grid className="left-box-shadow" item xl={2}>
-              <div className="text-center username-margin">Howdy, <span>{user.first_name}!</span>
-              <div >
-              <img className="profile-img" src={plannerImg} alt="Image of a planner" />
-              </div>
-              
-              </div>
               </Grid>
             </Grid>
+            <SideProfileColumn />
           </Grid>
-        </Container>
-      </div>
-    </>
+        </Grid>
+      </Container>
+    </div>
   );
 }
 
