@@ -9,7 +9,8 @@ import '../App/App.css'
 
 function SideNavColumn() {
   return (
-    <Grid className="right-box-shadow background-primary-white rounded-corners m-r-lg" item xl={2}>
+    <Grid className="right-box-shadow background-primary-white rounded-corners m-r-lg sticky" item xl={2}>
+      <div className="sticky">
       <Grid container justifyContent={"center"}>
         <Grid item xl={10}>
           <h2 className="text-center">Future Plans</h2>
@@ -54,6 +55,7 @@ function SideNavColumn() {
           <AutoStoriesIcon /> <span>My Story</span>
         </Grid>
       </Grid>
+      </div>
     </Grid>
   );
 }

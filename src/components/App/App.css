@@ -206,6 +206,10 @@ input {
   margin-top: 1rem;
 }
 
+.m-n {
+  margin: 0;
+}
+
 .m-b-l {
   margin-bottom: 1rem;
 }
@@ -232,4 +236,9 @@ input {
 
 .underline {
   text-decoration: underline;
+}
+
+.sticky {
+  position: sticky;
+  top: .25rem;
 }
