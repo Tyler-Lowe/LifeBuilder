@@ -281,7 +281,7 @@ const annualGrowthRate = 7; // Example growth rate
         <Grid container>
           <Grid justifyContent={"center"} container item xl={12} sx={{ marginTop: "3rem", borderRadius: "25px" }}>
             <SideNavColumn />
-            <Grid justifyContent={"center"} container item xl={8}>
+            <Grid justifyContent={"center"} container item xl={10}>
               <Grid className="db-primary-container" item xl={11} sx={{ backgroundColor: "#fffffb", borderRadius: "10px", padding: "1rem" }}>
                 <h2 className="text-center">Future: {selectedCollegeMajor}</h2>
                 <Grid container>
@@ -549,7 +549,7 @@ const annualGrowthRate = 7; // Example growth rate
                 </Grid>
               </Grid>
             </Grid>
-            <SideProfileColumn />
+            {/* <SideProfileColumn /> */}
           </Grid>
         </Grid>
       </Container>
