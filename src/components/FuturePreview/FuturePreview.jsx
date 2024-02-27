@@ -21,6 +21,7 @@ function FuturePreview() {
   const history = useHistory();
   const user = useSelector((store) => store.user);
   const userSelections = useSelector((state) => state.userSelections);
+  console.log(userSelections, 'Alpha Here')
 
   // Tax Calculator
 

@@ -18,7 +18,7 @@ function* addToUserFuture(action) {
 }
 
 function* addToUserFutureSaga() {
-  yield takeLatest('UPDATE_USER_FUTURE_TABLE', addToUserFuture);
+  yield takeLatest('UPDATE_USER_FUTURE_TABLE_NOW', addToUserFuture);
 }
 
 

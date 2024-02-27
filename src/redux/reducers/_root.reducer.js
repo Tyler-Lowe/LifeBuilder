@@ -6,6 +6,7 @@ import stateNameReducer from './statename.reducer'
 import collegeNameReducer from './collegename.reducer'
 import userFuture from './userfuture.reducer'
 import userSelectionsReducer from './userfutureselections.reducer'
+import userFutureUpdateReducer from './userfutureselections.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   stateName: stateNameReducer,
   collegeName: collegeNameReducer,
   userFuture,
+  userFutureUpdateReducer,
   userSelections: userSelectionsReducer,
 
 });

@@ -20,9 +20,8 @@ import "./Dashboard.css";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const userFutureData = useSelector((store) => store.userFuture);
-console.log(typeof userFutureData, 'WHAT IS THE TYPE?!')
-console.log(userFutureData, 'NOW')
+const userFutureData = useSelector((store) => store.userFuture) || [];
+
 
   const [selectedCollegeMajor, setSelectedCollegeMajor] = useState('');
   const [selectedId, setSelectedId] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
@@ -44,6 +43,8 @@ console.log(userFutureData, 'NOW')
   const [needs2, setNeeds] = useState(0);
   const [wants2, setWants] = useState(0);
   const [savings2, setSavings] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
+
 
 
 
@@ -138,16 +139,26 @@ console.log(userFutureData, 'NOW')
   const handleStudentLoanChange = (event) => handleChange(event, setSelectedStudentLoan);
   const handleMiscDebtChange = (event) => handleChange(event, setSelectedMiscDebt);
   
-  const handleSubmit = async () => {
-    await dispatch({  type: 'UPDATE_USER_FUTURE_TABLE_NOW', payload: {  selectedHousing, selectedGroceries, selectedUtilities, selectedTransportation, selectedStudentLoan, selectedNecessities, selectedHealthCare, selectedEatingOut, selectedEntertainment, selectedVacations, selectedMiscWants, selected401kContr, selectedMiscSavings, selectedMiscDebt, selectedId}  })
-    successAlert();
-  }
+  function successAlert() {
+    setShowAlert(true);
+    setTimeout(() => {
+        setShowAlert(false);
+    }, 5000); // Adjust time as needed
+}
 
-  function successAlert () {
-    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-    Here is a gentle confirmation that your action was successful.
-  </Alert>
-  }
+const handleSubmit = async () => {
+  await dispatch({
+    type: 'UPDATE_USER_FUTURE_TABLE_NOW',
+    payload: {
+      selectedHousing, selectedGroceries, selectedUtilities, selectedTransportation,
+      selectedStudentLoan, selectedNecessities, selectedHealthCare, selectedEatingOut,
+      selectedEntertainment, selectedVacations, selectedMiscWants, selected401kContr,
+      selectedMiscSavings, selectedMiscDebt, selectedId
+    }
+  });
+  successAlert(); // Call the function to show and then automatically hide the alert
+};
+
 
 
   // function findDataById(selectedId) {
@@ -299,6 +310,14 @@ const annualGrowthRate = 7; // Example growth rate
           <Grid justifyContent={"center"} container item xl={12} sx={{ marginTop: "3rem", borderRadius: "25px" }}>
             <SideNavColumn />
             <Grid justifyContent={"center"} container item xl={10}>
+            <div className={`sticky alert-success ${showAlert ? 'show' : ''}`}>
+    {showAlert && (
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+            {selectedCollegeMajor} Successfully Updated!
+        </Alert>
+    )}
+    {/* Rest of your component */}
+</div>
               <Grid className="db-primary-container" item xl={11} sx={{ backgroundColor: "#fffffb", borderRadius: "10px", padding: "1rem" }}>
                 <h2 className="text-center">Future: {selectedCollegeMajor}</h2>
                 <Grid container>
@@ -312,11 +331,13 @@ const annualGrowthRate = 7; // Example growth rate
 
                         inputProps={{ 'aria-label': 'Without label' }}
                       >
-{Array.isArray(userFutureData) && userFutureData.map((item, index) => (
-  <MenuItem key={index} value={`${item.college_name} - ${item.college_major}`}>
-    {`${item.college_name} - ${item.college_major}`}
-  </MenuItem>
-))}
+                        {console.log(userFutureData, Array.isArray(userFutureData), 'ALPHA WHAT WE GOT HERE')};
+
+                        {userFutureData.map((item, index) => (
+                          <MenuItem key={index} value={`${item.college_name} - ${item.college_major}`}>
+                            {`${item.college_name} - ${item.college_major}`}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </FormControl>
                     

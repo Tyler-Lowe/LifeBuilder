@@ -242,3 +242,13 @@ input {
   position: sticky;
   top: .25rem;
 }
+
+.alert-success {
+    z-index: 99;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0; /* Alert starts out invisible */
+}
+
+.alert-success.show {
+    opacity: 1; /* Alert becomes fully visible */
+}
