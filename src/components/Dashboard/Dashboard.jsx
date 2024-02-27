@@ -13,12 +13,16 @@ import { Pie } from "react-chartjs-2";
 import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChatJS } from 'chart.js/auto'
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 import "./Dashboard.css";
 
 
 function Dashboard() {
   const dispatch = useDispatch();
   const userFutureData = useSelector((store) => store.userFuture);
+console.log(typeof userFutureData, 'WHAT IS THE TYPE?!')
+console.log(userFutureData, 'NOW')
 
   const [selectedCollegeMajor, setSelectedCollegeMajor] = useState('');
   const [selectedId, setSelectedId] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
@@ -40,6 +44,8 @@ function Dashboard() {
   const [needs2, setNeeds] = useState(0);
   const [wants2, setWants] = useState(0);
   const [savings2, setSavings] = useState(0);
+
+
 
   // Fetch user future on component mount
   useEffect(() => {
@@ -132,11 +138,22 @@ function Dashboard() {
   const handleStudentLoanChange = (event) => handleChange(event, setSelectedStudentLoan);
   const handleMiscDebtChange = (event) => handleChange(event, setSelectedMiscDebt);
   
-
-  function findDataById(selectedId) {
-    return userFutureData.find(item => item.id === selectedId)
+  const handleSubmit = async () => {
+    await dispatch({  type: 'UPDATE_USER_FUTURE_TABLE_NOW', payload: {  selectedHousing, selectedGroceries, selectedUtilities, selectedTransportation, selectedStudentLoan, selectedNecessities, selectedHealthCare, selectedEatingOut, selectedEntertainment, selectedVacations, selectedMiscWants, selected401kContr, selectedMiscSavings, selectedMiscDebt, selectedId}  })
+    successAlert();
   }
-  console.log(findDataById(selectedId), 'Tyler this is the find');
+
+  function successAlert () {
+    <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+    Here is a gentle confirmation that your action was successful.
+  </Alert>
+  }
+
+
+  // function findDataById(selectedId) {
+  //   return userFutureData.find(item => item.id === selectedId)
+  // }
+  // console.log(findDataById(selectedId), 'Tyler this is the find');
 
   // Finance Calculations
   function calculateMonthlyTakeHomePay(salary) {
@@ -295,16 +312,17 @@ const annualGrowthRate = 7; // Example growth rate
 
                         inputProps={{ 'aria-label': 'Without label' }}
                       >
-                        {userFutureData.map((item, index) => (
-                          <MenuItem key={index} value={`${item.college_name} - ${item.college_major}`}>
-                            {`${item.college_name} - ${item.college_major}`}
-                          </MenuItem>
-                        ))}
+{Array.isArray(userFutureData) && userFutureData.map((item, index) => (
+  <MenuItem key={index} value={`${item.college_name} - ${item.college_major}`}>
+    {`${item.college_name} - ${item.college_major}`}
+  </MenuItem>
+))}
                       </Select>
                     </FormControl>
                     
-                    <p>Average Salary: ${selectedCollegeMajorSalary}<Tooltip title="This is the average US salary for your chosen major" placement="right-start"><InfoIcon /></Tooltip></p>
-                    <p>Monthly Take Home Pay: ${monthlyTakeHomePay}</p>
+                    <p>Average Salary: ${selectedCollegeMajorSalary}
+                    <span className="info-icon"><Tooltip title="This is the average US salary for your chosen major" placement="right-start"><InfoIcon /></Tooltip></span></p>
+                    <p>Monthly Take Home Pay: ${monthlyTakeHomePay}<span className="info-icon"><Tooltip title="This amount is after taxes are deducted" placement="right-start"><InfoIcon /></Tooltip></span></p>
                   </Grid>
                 </Grid>
                 <h2 className="text-bold">Needs:</h2>
@@ -544,7 +562,20 @@ const annualGrowthRate = 7; // Example growth rate
                   <h3>Total Saved: ${futureValue.toFixed(2)}</h3>
                 </Grid>
                 <Grid container justifyContent={'space-around'}>
-                  <Button>Save Changes</Button><Button>Delete Future</Button>
+                <Button
+                        sx={{
+                          backgroundColor: "#f05b6d",
+                          padding: ".5rem 1.25rem",
+                        }}
+                        className="button-main"
+                        variant="contained"
+                        type="button"
+                        onClick={handleSubmit}
+                      >
+                        Update Future
+                      </Button>
+                  
+                  <Button>Delete Future</Button>
 
                 </Grid>
               </Grid>

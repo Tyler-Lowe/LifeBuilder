@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
   const collegeDescription = req.body.selectedMajorDescription;
   const salary = req.body.selectedMajorSalary;
   // Initialize additional fields to 0 or appropriate default values
-  const avgMortgage = req.body.avgMortgage || null;
+  const avgMortgage = req.body.avgMortgage || 0;
   const avgGroceries = req.body.avgGroceries || 0;
   const avgUtilities = req.body.avgUtilities || 0;
   const avgCarPayments = req.body.avgCarPayments || 0;
