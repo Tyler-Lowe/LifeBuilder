@@ -7,7 +7,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import HomeIcon from '@mui/icons-material/Home';
 import { Container } from "@mui/material";
 import { useSelector } from 'react-redux';
-import plannerImg from '../../images/profile-img.png'
+import plannerImg from '../../images/user-avatar.png'
 
 function UserHomePage() {
     const history = useHistory();

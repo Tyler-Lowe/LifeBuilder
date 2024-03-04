@@ -214,6 +214,10 @@ input {
   margin-bottom: 1rem;
 }
 
+.m-t-l {
+  margin-top: 1rem;
+}
+
 .rounded-corners {
   border-radius: 10px;
 }
@@ -228,6 +232,14 @@ input {
 
 .p-b-xl {
   padding-bottom: 3rem;
+}
+
+.p-t-l {
+  padding-top: 1rem;
+}
+
+.p-b-l {
+  padding-bottom: 1rem;
 }
 
 .text-bold {

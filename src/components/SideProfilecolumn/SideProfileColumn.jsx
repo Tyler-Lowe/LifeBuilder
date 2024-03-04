@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import { useSelector } from "react-redux";
-import plannerImg from '../../images/profile-img.png'
+import plannerImg from '../../images/user-avatar.png'
 import '../App/App.css'
 
 

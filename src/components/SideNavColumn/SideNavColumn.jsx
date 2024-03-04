@@ -5,19 +5,35 @@ import AddIcon from "@mui/icons-material/Add";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+import { useSelector } from "react-redux";
+import plannerImg from '../../images/user-avatar.png'
+import { useHistory } from "react-router-dom";
+
 import '../App/App.css'
 
 function SideNavColumn() {
+  const user = useSelector((store) => store.user);
+  const history = useHistory();
+
+  const handleSubmit = async () => {
+    history.push('/college-major-selection')
+  }
+
   return (
     <Grid className="right-box-shadow background-primary-white rounded-corners m-r-lg sticky" item xl={2}>
       <div className="sticky">
       <Grid container justifyContent={"center"}>
-        <Grid item xl={10}>
-          <h2 className="text-center">Future Plans</h2>
+        <Grid item lg={12} xl={10}>
+            <div className="left-box-shadow m-b-l">
+                <div className="text-center username-margin">Howdy, <span>{user.first_name}!</span></div>
+                <div className="text-center">
+                    <img className="profile-img" src={plannerImg} alt="Image of a planner" />
+                </div>
+            </div>
         </Grid>
       </Grid>
       <Grid container justifyContent={"center"}>
-        <Grid item xl={7}>
+        <Grid item xl={7} className="m-t-l p-t-l">
           <Button
             sx={{
               backgroundColor: "#d2d0f6",
@@ -25,6 +41,7 @@ function SideNavColumn() {
               width: "100%",
             }}
             className="text-center"
+            onClick={handleSubmit}
           >
             <h4>
               Add New <br /> Future <br />
@@ -38,21 +55,6 @@ function SideNavColumn() {
               />
             </h4>
           </Button>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent={"center"}>
-        <Grid container alignItems={"center"} justifyContent={"center"} item xl={10}>
-          <GridViewIcon /> <span>Dashboard</span>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent={"center"}>
-        <Grid container alignItems={"center"} justifyContent={"center"} item xl={10}>
-          <Face5Icon /> <span>Activity</span>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent={"center"}>
-        <Grid container alignItems={"center"} justifyContent={"center"} item xl={10}>
-          <AutoStoriesIcon /> <span>My Story</span>
         </Grid>
       </Grid>
       </div>

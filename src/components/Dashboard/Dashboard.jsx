@@ -22,10 +22,12 @@ function Dashboard() {
   const dispatch = useDispatch();
 const userFutureData = useSelector((store) => store.userFuture) || [];
 
+console.log(userFutureData, 'ASHLEY')
 
   const [selectedCollegeMajor, setSelectedCollegeMajor] = useState('');
   const [selectedId, setSelectedId] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
   const [selectedCollegeMajorSalary, setSelectedCollegeMajorSalary] = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
+  const [selectedMajorDescription, setSelectedMajorDescription]  = useState(userFutureData.length > 0 ? userFutureData[userFutureData.length - 1].id : null);
   const [selectedHousing, setSelectedHousing] = useState(0);
   const [selectedUtilities, setSelectedUtilities] = useState(0);
   const [selectedGroceries, setSelectedGroceries] = useState(0);
@@ -46,7 +48,7 @@ const userFutureData = useSelector((store) => store.userFuture) || [];
   const [showAlert, setShowAlert] = useState(false);
 
 
-
+console.log('Tlyer desc here LOOK', selectedMajorDescription)
 
   // Fetch user future on component mount
   useEffect(() => {
@@ -60,6 +62,7 @@ const userFutureData = useSelector((store) => store.userFuture) || [];
       setSelectedCollegeMajor(`${lastItem.college_name} - ${lastItem.college_major}`);
       setSelectedId(lastItem.id);
       setSelectedCollegeMajorSalary(lastItem.college_major_salary);
+      setSelectedMajorDescription(lastItem.college_major_description);
       setSelectedHousing(lastItem.avg_monthly_mortgage);
       setSelectedUtilities(lastItem.avg_monthly_utilities);
       setSelectedGroceries(lastItem.avg_monthy_groceries);
@@ -95,6 +98,7 @@ const userFutureData = useSelector((store) => store.userFuture) || [];
       const selectedObject = userFutureData[selectedIndex];
       setSelectedId(selectedObject.id); // Update the state with the selected ID
       setSelectedCollegeMajorSalary(selectedObject.college_major_salary);
+      setSelectedMajorDescription(selectedObject.college_major_description);
       setSelectedHousing(selectedObject.avg_monthly_mortgage);
       setSelectedGroceries(selectedObject.avg_monthy_groceries);
       setSelectedUtilities(selectedObject.avg_monthly_utilities);
@@ -340,7 +344,7 @@ const annualGrowthRate = 7; // Example growth rate
                         ))}
                       </Select>
                     </FormControl>
-                    
+                    <p>Description of major: {selectedMajorDescription}</p>
                     <p>Average Salary: ${selectedCollegeMajorSalary}
                     <span className="info-icon"><Tooltip title="This is the average US salary for your chosen major" placement="right-start"><InfoIcon /></Tooltip></span></p>
                     <p>Monthly Take Home Pay: ${monthlyTakeHomePay}<span className="info-icon"><Tooltip title="This amount is after taxes are deducted" placement="right-start"><InfoIcon /></Tooltip></span></p>
@@ -512,7 +516,7 @@ const annualGrowthRate = 7; // Example growth rate
                     />
                   </Grid>
                 </Grid>
-                <h2 className="text-center">Advised Budget vs. Reality</h2>
+                <h2 className="text-center">Advised Budget vs. Actual Budget</h2>
                 <Grid container spacing={6}>
                   <Grid item xl={6}>
                     <h2 className="text-center">Adivised</h2>

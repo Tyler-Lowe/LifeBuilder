@@ -12,7 +12,7 @@ import Face5Icon from "@mui/icons-material/Face5";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import StateSelection from "../StateSelection/StateSelection";
 import {useSelector, useDispatch} from 'react-redux';
-import plannerImg from '../../images/profile-img.png'
+import plannerImg from '../../images/user-avatar.png'
 
 
 function MajorSelection() {
