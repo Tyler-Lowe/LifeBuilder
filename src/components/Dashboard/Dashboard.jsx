@@ -322,7 +322,7 @@ const annualGrowthRate = 7; // Example growth rate
     )}
     {/* Rest of your component */}
 </div>
-              <Grid className="db-primary-container" item xl={11} sx={{ backgroundColor: "#fffffb", borderRadius: "10px", padding: "1rem" }}>
+              <Grid className="db-primary-container" md={8} lg={10} item xl={11} sx={{ backgroundColor: "#fffffb", borderRadius: "10px", padding: "1rem" }}>
                 <h2 className="text-center">Future: {selectedCollegeMajor}</h2>
                 <Grid container>
                   <Grid item sx={{ backgroundColor: "#fffffb", borderRadius: "5px" }}>
